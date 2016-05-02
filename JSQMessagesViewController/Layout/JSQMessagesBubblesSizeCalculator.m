@@ -110,9 +110,12 @@
 
         //  from the cell xibs, there is a 2 point space between avatar and bubble
         CGFloat spacingBetweenAvatarAndBubble = 2.0f;
-        CGFloat horizontalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.left + layout.messageBubbleTextViewTextContainerInsets.right;
-        CGFloat horizontalFrameInsets = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right;
-
+//        CGFloat horizontalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.left + layout.messageBubbleTextViewTextContainerInsets.right;
+//        CGFloat horizontalFrameInsets = layout.messageBubbleTextViewFrameInsets.left + layout.messageBubbleTextViewFrameInsets.right;
+        
+        CGFloat horizontalContainerInsets = layout.messageBubbleTextLabelTextContainerInsets.left + layout.messageBubbleTextLabelTextContainerInsets.right;
+        CGFloat horizontalFrameInsets = layout.messageBubbleTextLabelFrameInsets.left + layout.messageBubbleTextLabelFrameInsets.right;
+        
         CGFloat horizontalInsetsTotal = horizontalContainerInsets + horizontalFrameInsets + spacingBetweenAvatarAndBubble;
         CGFloat maximumTextWidth = [self textBubbleWidthForLayout:layout] - avatarSize.width - layout.messageBubbleLeftRightMargin - horizontalInsetsTotal;
 
@@ -123,8 +126,11 @@
 
         CGSize stringSize = CGRectIntegral(stringRect).size;
 
-        CGFloat verticalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom;
-        CGFloat verticalFrameInsets = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom;
+//        CGFloat verticalContainerInsets = layout.messageBubbleTextViewTextContainerInsets.top + layout.messageBubbleTextViewTextContainerInsets.bottom;
+//        CGFloat verticalFrameInsets = layout.messageBubbleTextViewFrameInsets.top + layout.messageBubbleTextViewFrameInsets.bottom;
+        
+        CGFloat verticalContainerInsets = layout.messageBubbleTextLabelTextContainerInsets.top + layout.messageBubbleTextLabelTextContainerInsets.bottom;
+        CGFloat verticalFrameInsets = layout.messageBubbleTextLabelFrameInsets.top + layout.messageBubbleTextLabelFrameInsets.bottom;
 
         //  add extra 2 points of space (`self.additionalInset`), because `boundingRectWithSize:` is slightly off
         //  not sure why. magix. (shrug) if you know, submit a PR

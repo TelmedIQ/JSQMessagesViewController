@@ -45,7 +45,13 @@
 @property (assign, nonatomic) UIEdgeInsets textViewTextContainerInsets;
 
 /**
- *  The inset of the frame of the text view within a `JSQMessagesCollectionViewCell`. 
+ *  The inset of the label's layout area within the view's content area in a `JSQMessageCollectionViewCell`.
+ *  The specified inset values should be greater than or equal to `0.0`.
+ */
+@property (assign, nonatomic) UIEdgeInsets textLabelTextContainerInsets;
+
+/**
+ *  The inset of the frame of the text view within a `JSQMessagesCollectionViewCell`.
  *  
  *  @discussion The inset values should be greater than or equal to `0.0` and are applied in the following ways:
  *
@@ -62,6 +68,25 @@
  *  4. The bottom value insets the bottom of the frame.
  */
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
+
+/**
+*  The inset of the frame of the label within a `JSQMessagesCollectionViewCell`.
+*
+*  @discussion The inset values should be greater than or equal to `0.0` and are applied in the following ways:
+*
+*  1. The right value insets the label frame on the side adjacent to the avatar image
+*  (or where the avatar would normally appear). For outgoing messages this is the right side,
+*  for incoming messages this is the left side.
+*
+*  2. The left value insets the label frame on the side opposite the avatar image
+*  (or where the avatar would normally appear). For outgoing messages this is the left side,
+*  for incoming messages this is the right side.
+*
+*  3. The top value insets the top of the frame.
+*
+*  4. The bottom value insets the bottom of the frame.
+*/
+@property (assign, nonatomic) UIEdgeInsets textLabelFrameInsets;
 
 /**
  *  The size of the `avatarImageView` of a `JSQMessagesCollectionViewCellIncoming`.

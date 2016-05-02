@@ -38,6 +38,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet UIView *messageBubbleContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageBubbleImageView;
 @property (weak, nonatomic) IBOutlet JSQMessagesCellTextView *textView;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *textLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
@@ -49,6 +50,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewAvatarHorizontalSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewMarginHorizontalSpaceConstraint;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textLabelTopVerticalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textLabelBottomVerticalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textLabelAvatarHorizontalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textLabelMarginHorizontalSpaceConstraint;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellTopLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleTopLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBottomLabelHeightConstraint;
@@ -57,6 +63,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *avatarContainerViewHeightConstraint;
 
 @property (assign, nonatomic) UIEdgeInsets textViewFrameInsets;
+@property (assign, nonatomic) UIEdgeInsets textLabelFrameInsets;
 
 @property (assign, nonatomic) CGSize avatarViewSize;
 
@@ -141,6 +148,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     _cellBottomLabel = nil;
 
     _textView = nil;
+    _textLabel = nil;
     _messageBubbleImageView = nil;
     _mediaView = nil;
 
@@ -163,6 +171,13 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     self.textView.dataDetectorTypes = UIDataDetectorTypeNone;
     self.textView.text = nil;
     self.textView.attributedText = nil;
+    
+    self.textLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink | NSTextCheckingTypePhoneNumber;
+    self.textLabel.text = nil;
+    self.textLabel.attributedText = nil;
+    self.textLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+    self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.textLabel.numberOfLines = 0;
 
     self.avatarImageView.image = nil;
     self.avatarImageView.highlightedImage = nil;
@@ -182,12 +197,22 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     if (self.textView.font != customAttributes.messageBubbleFont) {
         self.textView.font = customAttributes.messageBubbleFont;
     }
+    
+    if (self.textLabel.font != customAttributes.messageBubbleFont) {
+        self.textLabel.font = customAttributes.messageBubbleFont;
+    }
 
     if (!UIEdgeInsetsEqualToEdgeInsets(self.textView.textContainerInset, customAttributes.textViewTextContainerInsets)) {
         self.textView.textContainerInset = customAttributes.textViewTextContainerInsets;
     }
+    
+    if (!UIEdgeInsetsEqualToEdgeInsets(self.textLabel.textInsets, customAttributes.textLabelTextContainerInsets)) {
+        self.textLabel.textInsets = customAttributes.textLabelTextContainerInsets;
+    }
 
     self.textViewFrameInsets = customAttributes.textViewFrameInsets;
+    
+    self.textLabelFrameInsets = customAttributes.textLabelFrameInsets;
 
     [self jsq_updateConstraint:self.messageBubbleContainerWidthConstraint
                   withConstant:customAttributes.messageBubbleContainerViewWidth];
@@ -307,10 +332,23 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
     [self jsq_updateConstraint:self.textViewMarginHorizontalSpaceConstraint withConstant:textViewFrameInsets.left];
 }
 
+- (void)setTextLabelFrameInsets:(UIEdgeInsets)labelFrameInsets
+{
+    if (UIEdgeInsetsEqualToEdgeInsets(labelFrameInsets, self.labelFrameInsets)) {
+        return;
+    }
+    
+    [self jsq_updateConstraint:self.textLabelTopVerticalSpaceConstraint withConstant:labelFrameInsets.top];
+    [self jsq_updateConstraint:self.textLabelBottomVerticalSpaceConstraint withConstant:labelFrameInsets.bottom];
+    [self jsq_updateConstraint:self.textLabelAvatarHorizontalSpaceConstraint withConstant:labelFrameInsets.right];
+    [self jsq_updateConstraint:self.textLabelMarginHorizontalSpaceConstraint withConstant:labelFrameInsets.left];
+}
+
 - (void)setMediaView:(UIView *)mediaView
 {
     [self.messageBubbleImageView removeFromSuperview];
     [self.textView removeFromSuperview];
+    [self.textLabel removeFromSuperview];
 
     [mediaView setTranslatesAutoresizingMaskIntoConstraints:NO];
     mediaView.frame = self.messageBubbleContainerView.bounds;
@@ -345,6 +383,14 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
                             self.textViewMarginHorizontalSpaceConstraint.constant,
                             self.textViewBottomVerticalSpaceConstraint.constant,
                             self.textViewAvatarHorizontalSpaceConstraint.constant);
+}
+
+- (UIEdgeInsets)labelFrameInsets
+{
+    return UIEdgeInsetsMake(self.textLabelTopVerticalSpaceConstraint.constant,
+                            self.textLabelMarginHorizontalSpaceConstraint.constant,
+                            self.textLabelBottomVerticalSpaceConstraint.constant,
+                            self.textLabelAvatarHorizontalSpaceConstraint.constant);
 }
 
 #pragma mark - Utilities

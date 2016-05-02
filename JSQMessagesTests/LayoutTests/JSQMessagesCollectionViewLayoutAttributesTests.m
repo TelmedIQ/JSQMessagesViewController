@@ -36,7 +36,9 @@
     attrs.messageBubbleFont = [UIFont systemFontOfSize:15.0f];
     attrs.messageBubbleContainerViewWidth = 40.0f;
     attrs.textViewTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
+    attrs.textLabelTextContainerInsets = UIEdgeInsetsMake(10.0f, 8.0f, 10.0f, 8.0f);
     attrs.textViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
+    attrs.textLabelFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     attrs.incomingAvatarViewSize = CGSizeMake(34.0f, 34.0f);
     attrs.outgoingAvatarViewSize = CGSizeZero;
     attrs.cellTopLabelHeight = 20.0f;

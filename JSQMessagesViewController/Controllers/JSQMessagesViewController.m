@@ -463,16 +463,19 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = collectionView;
 
     if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-
-        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-            //  workaround for iOS 7 textView data detectors bug
-            cell.textView.text = nil;
-            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
-                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
-        }
-
-        NSParameterAssert(cell.textView.text != nil);
+//        cell.textView.text = [messageItem text];
+//
+//        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+//            //  workaround for iOS 7 textView data detectors bug
+//            cell.textView.text = nil;
+//            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
+//                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
+//        }
+//
+//        NSParameterAssert(cell.textView.text != nil);
+        
+        cell.textLabel.text = [messageItem text];
+//        NSParameterAssert(cell.textLabel.text != nil);
 
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];

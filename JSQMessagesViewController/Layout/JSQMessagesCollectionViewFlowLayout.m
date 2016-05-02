@@ -76,6 +76,9 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     _messageBubbleTextViewFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
     _messageBubbleTextViewTextContainerInsets = UIEdgeInsetsMake(7.0f, 14.0f, 7.0f, 14.0f);
     
+    _messageBubbleTextLabelFrameInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 6.0f);
+    _messageBubbleTextLabelTextContainerInsets = UIEdgeInsetsMake(7.0f, 14.0f, 7.0f, 14.0f);
+    
     CGSize defaultAvatarSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
     _incomingAvatarViewSize = defaultAvatarSize;
     _outgoingAvatarViewSize = defaultAvatarSize;
@@ -172,6 +175,16 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     }
     
     _messageBubbleTextViewTextContainerInsets = messageBubbleTextContainerInsets;
+    [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+}
+
+- (void)setMessageBubbleTextLabelTextContainerInsets:(UIEdgeInsets)messageBubbleTextContainerInsets
+{
+    if (UIEdgeInsetsEqualToEdgeInsets(_messageBubbleTextLabelTextContainerInsets, messageBubbleTextContainerInsets)) {
+        return;
+    }
+    
+    _messageBubbleTextLabelTextContainerInsets = messageBubbleTextContainerInsets;
     [self invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
@@ -436,6 +449,10 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     layoutAttributes.textViewFrameInsets = self.messageBubbleTextViewFrameInsets;
     
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
+    
+    layoutAttributes.textLabelFrameInsets = self.messageBubbleTextLabelFrameInsets;
+    
+    layoutAttributes.textLabelTextContainerInsets = self.messageBubbleTextLabelTextContainerInsets;
     
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
     

@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessagesCollectionViewCell.h"
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
 
 /**
  *  A `JSQMessagesCollectionViewCellIncoming` object is a concrete instance 

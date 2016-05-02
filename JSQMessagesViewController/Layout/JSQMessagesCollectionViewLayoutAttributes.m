@@ -93,7 +93,9 @@
         
         if (![layoutAttributes.messageBubbleFont isEqual:self.messageBubbleFont]
             || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewFrameInsets, self.textViewFrameInsets)
+            || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textLabelFrameInsets, self.textLabelFrameInsets)
             || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textViewTextContainerInsets, self.textViewTextContainerInsets)
+            || !UIEdgeInsetsEqualToEdgeInsets(layoutAttributes.textLabelTextContainerInsets, self.textLabelTextContainerInsets)
             || !CGSizeEqualToSize(layoutAttributes.incomingAvatarViewSize, self.incomingAvatarViewSize)
             || !CGSizeEqualToSize(layoutAttributes.outgoingAvatarViewSize, self.outgoingAvatarViewSize)
             || (int)layoutAttributes.messageBubbleContainerViewWidth != (int)self.messageBubbleContainerViewWidth
@@ -125,7 +127,9 @@
     copy.messageBubbleFont = self.messageBubbleFont;
     copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth;
     copy.textViewFrameInsets = self.textViewFrameInsets;
+    copy.textLabelFrameInsets = self.textLabelFrameInsets;
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;
+    copy.textLabelTextContainerInsets = self.textLabelTextContainerInsets;
     copy.incomingAvatarViewSize = self.incomingAvatarViewSize;
     copy.outgoingAvatarViewSize = self.outgoingAvatarViewSize;
     copy.cellTopLabelHeight = self.cellTopLabelHeight;

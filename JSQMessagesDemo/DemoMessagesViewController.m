@@ -75,7 +75,6 @@
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(customAction:)];
     [UIMenuController sharedMenuController].menuItems = @[ [[UIMenuItem alloc] initWithTitle:@"Custom Action"
                                                                                       action:@selector(customAction:)] ];
-
     /**
      *  OPT-IN: allow cells to be deleted
      */
@@ -514,15 +513,15 @@
     
     if (!msg.isMediaMessage) {
         
-        if ([msg.senderId isEqualToString:self.senderId]) {
-            cell.textView.textColor = [UIColor blackColor];
-        }
-        else {
-            cell.textView.textColor = [UIColor whiteColor];
-        }
+//        if ([msg.senderId isEqualToString:self.senderId]) {
+//            cell.textLabel.textColor = [UIColor blackColor];
+//        }
+//        else {
+//            cell.textLabel.textColor = [UIColor whiteColor];
+//        }
         
-        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+//        cell.textLabel.linkAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+//                                           NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
     
     return cell;
