@@ -368,6 +368,9 @@
 
 
 #pragma mark - JSQMessages CollectionView DataSource
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+}
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -494,7 +497,9 @@
      *  Override point for customizing cells
      */
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    cell.textLabel.delegate = self;
     
+    JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
     /**
      *  Configure almost *anything* on the cell
      *
@@ -509,7 +514,7 @@
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
+    
     
     if (!msg.isMediaMessage) {
         
@@ -657,6 +662,19 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - TTTAttributedLabel Delegate Methods
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    NSLog(@"Selected URL: %@", url);
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber {
+    NSLog(@"Selected Phone Number: %@", phoneNumber);
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result {
+    NSLog(@"Attributed Link Tapped: %@", result);
 }
 
 @end

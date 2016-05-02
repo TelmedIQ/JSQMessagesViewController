@@ -463,19 +463,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = collectionView;
 
     if (!isMediaMessage) {
-//        cell.textView.text = [messageItem text];
-//
-//        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
-//            //  workaround for iOS 7 textView data detectors bug
-//            cell.textView.text = nil;
-//            cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
-//                                                                           attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
-//        }
-//
-//        NSParameterAssert(cell.textView.text != nil);
         
+        cell.textLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink | NSTextCheckingTypePhoneNumber;
+        cell.textLabel.delegate = self;
         cell.textLabel.text = [messageItem text];
-//        NSParameterAssert(cell.textLabel.text != nil);
+        
+        NSParameterAssert(cell.textLabel.text != nil);
 
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
         cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
@@ -524,8 +517,8 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     else {
         cell.messageBubbleTopLabel.textInsets = UIEdgeInsetsMake(0.0f, bubbleTopLabelInset, 0.0f, 0.0f);
     }
-
-    cell.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+    
+    cell.textLabel.enabledTextCheckingTypes = NSTextCheckingTypePhoneNumber | NSTextCheckingTypeLink;
 
     cell.backgroundColor = [UIColor clearColor];
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
@@ -584,8 +577,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     //  however, this allows the 'copy, define, select' UIMenuController to show
     //  which conflicts with the collection view's UIMenuController
     //  temporarily disable 'selectable' to prevent this issue
-    JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    selectedCell.textView.selectable = NO;
+    //  JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
 
     return YES;
 }
@@ -757,14 +749,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_didReceiveMenuWillHideNotification:(NSNotification *)notification
 {
-    if (!self.selectedIndexPathForMenu) {
-        return;
-    }
-
-    //  per comment above in 'shouldShowMenuForItemAtIndexPath:'
-    //  re-enable 'selectable', thus re-enabling data detectors if present
-    JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
-    selectedCell.textView.selectable = YES;
     self.selectedIndexPathForMenu = nil;
 }
 

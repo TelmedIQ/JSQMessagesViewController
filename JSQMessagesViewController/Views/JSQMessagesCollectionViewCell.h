@@ -113,13 +113,6 @@
 @property (weak, nonatomic, readonly) JSQMessagesLabel *cellBottomLabel;
 
 /**
- *  Returns the text view of the cell. This text view contains the message body text.
- *
- *  @warning If mediaView returns a non-nil view, then this value will be `nil`.
- */
-@property (weak, nonatomic, readonly) JSQMessagesCellTextView *textView;
-
-/**
  *  Returns the text label of the cell. This text label contains the message body text.
  *
  *  @warning If mediaView returns a non-nil view, then this value will be `nil`.

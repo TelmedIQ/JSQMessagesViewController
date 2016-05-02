@@ -30,8 +30,7 @@
  *  @warning This class is intended to be subclassed. You should not use it directly.
  */
 @interface JSQMessagesViewController : UIViewController <JSQMessagesCollectionViewDataSource,
-                                                         JSQMessagesCollectionViewDelegateFlowLayout,
-                                                         UITextViewDelegate>
+                                                         JSQMessagesCollectionViewDelegateFlowLayout>
 
 /**
  *  Returns the collection view object managed by this view controller.
