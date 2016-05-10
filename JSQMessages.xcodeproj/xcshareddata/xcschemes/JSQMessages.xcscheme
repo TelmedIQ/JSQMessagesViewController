@@ -15,8 +15,8 @@
             hideIssues = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DB5B415FEEA605F54176466C0319B1A1"
-               BuildableName = "Pods.framework"
+               BlueprintIdentifier = "F7EF9F727BB21341ECDF14E70CD2BBED"
+               BuildableName = "libPods.a"
                BlueprintName = "Pods"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
