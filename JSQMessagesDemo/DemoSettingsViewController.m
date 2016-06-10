@@ -41,6 +41,8 @@
     self.outgoingAvatarsSwitch.on = [NSUserDefaults outgoingAvatarSetting];
     
     self.springySwitch.on = [NSUserDefaults springinessSetting];
+    
+    self.typingIndicatorShowAvatarSwitch.on = [NSUserDefaults typingIndicatorStyleSettingIsAvatar];
 }
 
 - (IBAction)didTapSwitch:(UISwitch *)sender
@@ -63,6 +65,9 @@
     }
     else if (sender == self.springySwitch) {
         [NSUserDefaults saveSpringinessSetting:sender.on];
+    }
+    else if (sender == self.typingIndicatorShowAvatarSwitch) {
+        [NSUserDefaults saveTypingIndicatorStyleSettingAsAvatar:sender.on];
     }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
