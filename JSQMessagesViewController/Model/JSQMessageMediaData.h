@@ -56,6 +56,10 @@
  */
 - (CGSize)mediaViewDisplaySize;
 
+- (CGSize)mediaViewDisplaySizeCompact;
+
+- (CGSize)mediaViewDisplaySizeExpanded;
+
 /**
  *  @return A placeholder media view to be displayed if mediaView is not yet available, or `nil`.
  *  For example, if mediaView will be constructed based on media data that must be downloaded,

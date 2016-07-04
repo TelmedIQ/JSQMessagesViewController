@@ -92,6 +92,24 @@
     return CGSizeMake(210.0f, 150.0f);
 }
 
+- (CGSize)mediaViewDisplaySizeCompact
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return CGSizeMake(315.0f, 75.0f);
+    }
+    
+    return CGSizeMake(210.0f, 50.0f);
+}
+
+- (CGSize)mediaViewDisplaySizeExpanded
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return CGSizeMake(400.0f, 225.0f);
+    }
+    
+    return CGSizeMake(300.0f, 150.0f);
+}
+
 - (UIView *)mediaPlaceholderView
 {
     if (self.cachedPlaceholderView == nil) {
