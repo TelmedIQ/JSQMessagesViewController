@@ -236,6 +236,8 @@
                                                     text:copyMessage.text];
         }
         
+        self.typingIndicatorMessage = [NSString stringWithFormat:@"%@ is typing...", newMessage.senderDisplayName];
+        
         /**
          *  Upon receiving a message, you should:
          *
