@@ -101,17 +101,11 @@
     JSQMessagesTypingIndicatorFooterView *footerView = [super dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                                  withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]
                                                                                         forIndexPath:indexPath];
-    if (self.typingIndicatorAvatarImage || self.typingIndicatorMessage || self.typingIndicatorTextColor || self.typingIndicatorTextFont) {
-        [footerView configureWithAvatarImage:self.typingIndicatorAvatarImage
-                                     message:self.typingIndicatorMessage
-                                   textColor:self.typingIndicatorTextColor
-                                        font:self.typingIndicatorTextFont];
-    } else {
-        [footerView configureWithEllipsisColor:self.typingIndicatorEllipsisColor
-                            messageBubbleColor:self.typingIndicatorMessageBubbleColor
-                           shouldDisplayOnLeft:self.typingIndicatorDisplaysOnLeft
-                             forCollectionView:self];
-    }
+
+    [footerView configureWithEllipsisColor:self.typingIndicatorEllipsisColor
+                        messageBubbleColor:self.typingIndicatorMessageBubbleColor
+                       shouldDisplayOnLeft:self.typingIndicatorDisplaysOnLeft
+                         forCollectionView:self];
 
     return footerView;
 }
