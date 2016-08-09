@@ -375,16 +375,6 @@
 #pragma mark - JSQMessages CollectionView DataSource
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    
-    if ([[[self.demoData.messages objectAtIndex:indexPath.item] media] isKindOfClass:[JSQMultiPhotoMediaItem class]]) {
-        JSQMultiPhotoMediaItem *mediaItem = (JSQMultiPhotoMediaItem *)[[self.demoData.messages objectAtIndex:indexPath.item] media];
-        NSLog(@"Images: %@", mediaItem.images);
-    }
-    
-    if ([[[self.demoData.messages objectAtIndex:indexPath.item] media] isKindOfClass:[JSQMultiPDFMediaItem class]]) {
-        JSQMultiPDFMediaItem *mediaItem = (JSQMultiPDFMediaItem *)[[self.demoData.messages objectAtIndex:indexPath.item] media];
-        NSLog(@"PDFs: %@", mediaItem.pdfs);
-    }
 }
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -515,12 +505,6 @@
     cell.textLabel.delegate = self;
     
     JSQMessage *msg = [self.demoData.messages objectAtIndex:indexPath.item];
-    
-    if ([msg.senderId isEqualToString: self.senderId]) {
-        [cell.textLabel setTextColor:[UIColor redColor]];
-    } else {
-        [cell.textLabel setTextColor:[UIColor orangeColor]];
-    }
     /**
      *  Configure almost *anything* on the cell
      *

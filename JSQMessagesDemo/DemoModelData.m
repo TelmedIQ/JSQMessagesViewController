@@ -131,10 +131,6 @@
                      nil];
     
     [self addPhotoMediaMessage];
-    [self addPhotosMediaMessage];
-    
-//    self.messages = [[NSMutableArray alloc] init];
-    [self addPdfsMediaMessage];
     
     /**
      *  Setting to load extra messages for testing/demo
@@ -167,30 +163,6 @@
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:photoItem];
     [self.messages addObject:photoMessage];
-}
-
-- (void)addPhotosMediaMessage
-{
-    JSQMultiPhotoMediaItem *multiPhotoItem = [[JSQMultiPhotoMediaItem alloc] initWithImages:@[[UIImage imageNamed:@"demo_avatar_jobs"],
-                                                                                              [UIImage imageNamed:@"goldengate"],
-                                                                                         [UIImage imageNamed:@"demo_avatar_cook"]]];
-    JSQMessage *multiPhotoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                        displayName:kJSQDemoAvatarDisplayNameSquires
-                                                              media:multiPhotoItem];
-    
-    [self.messages addObject:multiPhotoMessage];
-}
-
-- (void)addPdfsMediaMessage
-{
-    JSQMultiPDFMediaItem *multiPdfItem = [[JSQMultiPDFMediaItem alloc] initWithPdfs:@[@"www.pdf995.com/samples/pdf.pdf",
-                                                                                      @"http://www.pdfpdf.com/samples/xlsdemo1.pdf",
-                                                                                      @"http://www.pdfpdf.com/samples/Sample4.PDF"]];
-    JSQMessage *multiPdfMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
-                                                      displayName:kJSQDemoAvatarDisplayNameSquires
-                                                            media:multiPdfItem];
-    
-    [self.messages addObject:multiPdfMessage];
 }
 
 - (void)addLocationMediaMessageCompletion:(JSQLocationMediaItemCompletionBlock)completion
