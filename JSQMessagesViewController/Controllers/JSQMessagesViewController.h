@@ -178,6 +178,11 @@
  */
 @property (assign, nonatomic) CGFloat bottomContentAdditionalInset;
 
+/**
+ *  The string to indicate that a user is typing. If not set, a generic message will be shown. Setting this string will hide the typing indicator message bubble and ellipsis image.
+ */
+@property (copy, nonatomic) NSString *typingIndicatorMessage;
+
 #pragma mark - Class methods
 
 /**

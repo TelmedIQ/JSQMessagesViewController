@@ -65,6 +65,9 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 @property (assign, nonatomic) BOOL textViewWasFirstResponderDuringInteractivePop;
 
+@property (nonatomic, strong) UIView *typingIndicatorView;
+@property (nonatomic, strong) UILabel *typingIndicatorLabel;
+
 @end
 
 
@@ -129,6 +132,15 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                                                                      panGestureRecognizer:self.collectionView.panGestureRecognizer
                                                                                  delegate:self];
     }
+    
+    self.typingIndicatorView = [[UIView alloc] init];
+    [self.typingIndicatorView setBackgroundColor:[UIColor whiteColor]];
+    [self.typingIndicatorView setAlpha:0.0];
+    
+    self.typingIndicatorLabel = [[UILabel alloc] init];
+    [self.typingIndicatorLabel setFont:[UIFont italicSystemFontOfSize:14.0]];
+    [self.typingIndicatorLabel setTextColor:[UIColor lightGrayColor]];
+
 }
 
 - (void)dealloc
@@ -155,8 +167,29 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
 
     _showTypingIndicator = showTypingIndicator;
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    
+    if (_showTypingIndicator) {
+        
+        [self.typingIndicatorView setFrame:CGRectMake(0, self.inputToolbar.frame.origin.y - 30, self.view.frame.size.width, 30)];
+        
+        [self.typingIndicatorLabel setFrame:CGRectMake(5, 0, CGRectGetWidth(self.typingIndicatorView.frame) - 5, CGRectGetHeight(self.typingIndicatorView.frame))];
+        [self.typingIndicatorLabel setText:_typingIndicatorMessage];
+        [self.typingIndicatorView addSubview:self.typingIndicatorLabel];
+        [self.view addSubview:self.typingIndicatorView];
+        
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            [self.typingIndicatorView setAlpha:1];
+        }];
+    } else {
+        [UIView animateWithDuration:0.2
+                         animations:^{
+                             [self.typingIndicatorView setAlpha:0.0];
+                         } completion:^(BOOL finished) {
+                             [self.typingIndicatorView removeFromSuperview];
+                         }];
+    }
+
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
@@ -182,6 +215,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     _bottomContentAdditionalInset = bottomContentAdditionalInset;
     [self jsq_updateCollectionViewInsets];
 }
+
+- (void)setTypingIndicatorMessage:(NSString *)typingIndicatorMessage
+{
+    _typingIndicatorMessage = typingIndicatorMessage;
+}
+
 
 #pragma mark - View lifecycle
 
