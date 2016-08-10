@@ -507,6 +507,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
     JSQMessagesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = collectionView;
+    
+    if (isOutgoingMessage) {
+        cell.textLabel.textColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+    } else {
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+    }
 
     if (!isMediaMessage) {
         
