@@ -213,7 +213,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (CGFloat)itemWidth
 {
-    return CGRectGetWidth(self.collectionView.frame) - self.sectionInset.left - self.sectionInset.right;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    return screenRect.size.width - self.sectionInset.left - self.sectionInset.right;
 }
 
 - (UIDynamicAnimator *)dynamicAnimator
